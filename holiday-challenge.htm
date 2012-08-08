@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SANS Pen Testing Christmas Hacking Challenge: Grandma Got All Hax0red by a Reindeer... Or Did She?</title>
+
+<link rel="canonical" href="http://pen-testing.sans.org/holiday-challenge">
+
+<link rel="stylesheet" href="holiday-challenge_files/styles.css" type="text/css">
+<link rel="stylesheet" href="holiday-challenge_files/site_selector.css" type="text/css">
+
+
+<link rel="stylesheet" href="holiday-challenge_files/red_css.css" type="text/css" media="screen, projection, print">
+<link rel="stylesheet" type="text/css" href="holiday-challenge_files/site.css">
+
+<!-- Cross Domain Customizations 10.05.11 DB -->
+<script src="holiday-challenge_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26142645-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_setLocalRemoteServerMode']);
+  _gaq.push(['b._setAccount', 'UA-25324117-2']);
+  _gaq.push(['b._setDomainName', 'sans.org']);
+  _gaq.push(['b._addIgnoredRef', 'sans.org']);  
+  _gaq.push(['b._trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+    <div id="announcement-bar">
+                    <a href="http://pen-testing.sans.org/redirect/announce/165">Christmas Hacking Challenge - Participate Now</a>
+            </div>
+    <div class="bodywrap ">
+<div class="container">
+
+<!-- header -->
+<div class="header">
+
+<a href="http://pen-testing.sans.org/"><img src="holiday-challenge_files/logo.png" alt="SANS Pen Testing Christmas Hacking Challenge: Grandma Got All Hax0red by a Reindeer... Or Did She?" class="logo"></a>
+
+<ul class="site-selector">
+ <li class="site-switcher"><a href="#"><span class="hidden">SANS Site Network</span></a>
+  <ul class="sites">
+    <li class="current-site">Current Site</li>
+    <li class="pentest "><a href="http://pen-testing.sans.org/"><img src="holiday-challenge_files/pentest.png" alt="pentest">Penetration Testing</a></li>
+   <li class="selector-help">Choose a different site <a href="http://pen-testing.sans.org/help/site-network"><span class="hidden">Help</span></a></li><li class="sans "><a href="http://www.sans.org/"><img src="holiday-challenge_files/sans.png" alt="sans">Training</a></li>
+<li class="giac "><a href="http://www.giac.org/"><img src="holiday-challenge_files/giac.png" alt="giac">Certification</a></li>
+<li class="sti "><a href="http://www.sans.edu/"><img src="holiday-challenge_files/sti.png" alt="sti">Cyber Security Graduate School</a></li>
+<li class="isc "><a href="http://isc.sans.org/"><img src="holiday-challenge_files/isc.png" alt="isc">Internet Storm Center</a></li>
+<li class="awareness "><a href="http://www.securingthehuman.org/"><img src="holiday-challenge_files/awareness.png" alt="awareness">Security Awareness</a></li>
+<li class="forensics "><a href="http://computer-forensics.sans.org/"><img src="holiday-challenge_files/forensics.png" alt="forensics">Computer Forensics</a></li>
+<li class="audit "><a href="http://it-audit.sans.org/"><img src="holiday-challenge_files/audit.png" alt="audit">IT Audit</a></li>
+<li class="ssi last"><a href="http://software-security.sans.org/"><img src="holiday-challenge_files/ssi.png" alt="ssi">Software Security</a></li>
+  </ul>
+ </li>
+</ul>
+
+<div class="top-menu">
+<div class="search-form">
+<form action="http://pen-testing.sans.org/search/results" method="post" id="cse-search-box">
+<input name="_xsrf_token" value="64bc8775d0c56169c652b2dc774993363d69bb45" type="hidden">
+<input id="q" name="q" class="search-input" type="text"><input id="search-button" title="Search" name="sa" value="Search" class="search-submit" src="holiday-challenge_files/search.png" type="image"><input id="_website" name="_website" size="1" onchange="this.value=null" type="text"></form>
+<script type="text/javascript" src="holiday-challenge_files/brand"></script>
+</div><!-- / .search-form -->
+
+<div class="clear"></div>
+
+<ul class="dropdown">
+ <!-- <li class="root-item active"><a href="#">Active</a> -->
+ <li class="root-item "><a href="http://pen-testing.sans.org/resources/">Resources</a>
+ <ul>
+  <li class="first"><a href="http://pen-testing.sans.org/blog">Blog</a></li>
+  <li><a href="http://pen-testing.sans.org/resources/links">Links</a></li>
+  <li><a href="http://pen-testing.sans.org/resources/downloads">Downloads</a></li>
+  <li><a href="http://pen-testing.sans.org/resources/webcasts">Webcasts</a></li>
+  <li class="last"><a href="http://pen-testing.sans.org/resources/whitepapers">Whitepapers</a></li>
+ </ul>
+ </li>
+ <li class="root-item "><a href="http://pen-testing.sans.org/courses">Courses</a>
+ <ul>
+      <li class="first"><a href="http://pen-testing.sans.org/courses/description/hacker-techniques-exploits-incident-handling-40">SEC504: Hacker Techniques &amp; Incident Handling</a></li>
+      <li><a href="http://pen-testing.sans.org/courses/description/network-penetration-testing-ethical-hacking-937">SEC560: Network Pen Testing In-Depth</a></li>
+      <li><a href="http://pen-testing.sans.org/courses/description/web-app-penetration-testing-ethical-hacking-942">SEC542: Web App Pen Testing In-Depth</a></li>
+      <li><a href="http://pen-testing.sans.org/courses/description/wireless-ethical-hacking-penetration-testing-defenses-3">SEC617: Wireless Pen Testing &amp; Defenses</a></li>
+      <li><a href="http://pen-testing.sans.org/courses/description/advanced-penetration-testing-exploits-ethical-hacking-1517">SEC660: Advanced Pen Testing &amp; Exploit Dev</a></li>
+      <li><a href="http://pen-testing.sans.org/courses/description/metasploit-kung-fu-enterprise-pen-testing-1472">SEC580: Metasploit Kung Fu</a></li>
+      <li><a href="http://pen-testing.sans.org/courses/description/advanced-exploit-development-1522">SEC710: Advanced Exploit Development</a></li>
+    	<li class="last"><a href="http://pen-testing.sans.org/courses/ceh">SEC560 vs CEH</a></li>
+ </ul>
+ </li>
+ <li class="root-item "><a href="http://pen-testing.sans.org/events">Events</a>
+ <ul>
+  <li class="first"><a href="http://pen-testing.sans.org/events">Training Opportunities</a></li>
+ </ul>
+ </li>
+ <li class="root-item "><a href="http://pen-testing.sans.org/certification">Certification</a>
+ <ul>
+  <li class="first"><a href="http://pen-testing.sans.org/certification/gcih">GCIH - Certified Incident Handler</a></li>
+  <li><a href="http://pen-testing.sans.org/certification/gpen">GPEN - Penetration Tester</a></li>
+  <li><a href="http://pen-testing.sans.org/certification/gwapt">GWAPT - Web Application Penetration Tester</a></li>
+  <li><a href="http://pen-testing.sans.org/certification/gxpn">GXPN - Certified Exploit Developer</a></li>
+  <li><a href="http://pen-testing.sans.org/certification/pen-testers">Certified Pen Testers</a></li>
+  <li><a href="http://pen-testing.sans.org/certification/ethics">GIAC Code of Ethics</a></li>
+  <li class="last"><a href="http://www.giac.org/">GIAC Homepage</a></li>
+ </ul>
+ </li>
+ <li class="root-item "><a href="http://pen-testing.sans.org/instructors">Instructors</a>
+ <ul>
+  <li class="first"><a href="http://pen-testing.sans.org/instructors">SANS Instructors</a></li>
+  <li class="last"><a href="http://pen-testing.sans.org/instructors/author">Author Statements</a></li>
+ </ul>
+ </li>
+ <li class="root-item "><a href="http://pen-testing.sans.org/about">About</a>
+ <ul class="last-menu">
+  <li class="first last"><a href="http://pen-testing.sans.org/about">About</a></li>
+ </ul>
+ </li>
+</ul><!-- end .dropdown -->
+</div><!-- end .top-menu -->
+<div class="clear"></div><!-- end .clear -->
+</div><!-- end .header-->
+</div><!--  end .container -->
+
+    <!-- Header -->
+    <div class="container">
+
+    <div class="header-standard">
+      <h1 class="headerTitle">Christmas Hacking Challenge</h1>
+          </div><!-- end .top-text -->
+
+    <div class="header-icon "></div><!-- end .top-icon icon-gallery -->
+    <div class="clear"></div><!-- end .clear -->
+
+    </div><!-- end .container -->
+    
+    <div class="container">
+<!-- middle -->
+    <div class="middle">
+      <!-- content -->
+      <div class="wrapper">
+        <div id="" class="content">
+
+<div class="layouts noheaders">
+      <!-- layout1 -->
+            <div class="layout1 col-1">
+        <p><em>[Editor's Note: We've got an exciting announcement, 
+challenge fans!  This year's annual Christmas Hacking Challenge is based
+ on that old song <a href="http://www.youtube.com/watch?v=Yfs4FKbJzL0" target="_blank">Grandma Got Run Over by a Reindeer</a>.  In our telling, you'll get to analyze the evidence in detail to determine what really happened that fateful night.  In the <a href="http://www.ethicalhacker.net/content/view/285/2/" target="_blank">Miracle on Thirty-Hack Street</a>
+ challenge I wrote with Kevin Johnson a couple of years ago, we referred
+ to the horrible hit-and-run reindeer accident.  This year's challenge 
+is set in the back story of the earlier challenge, where you'll get to 
+figure out what really happened when Grandma Got All Hax0red by a 
+Reindeer... Or Did She? &#8212;Ed.]</em></p>
+<h3>Grandma Got All Hax0red by a Reindeer... Or Did She?</h3>
+<h4>By Ed Skoudis &amp; Tom Hessman</h4>
+<img src="holiday-challenge_files/grandma.png" class="align-right" height="400">
+<p>"And I will now demonstrate, ladies and gentlemen of the jury, beyond
+ a shadow of a doubt, that the defendant, Mr. Rudolph T. Reindeer, is 
+guilty of the heinous act of... CRIMINAL HOMICIDE!" boldly announced the
+ prosecutor.  The courtroom was in an uproar.  Santa buried his face in 
+his hands as Mrs. Claus began to weep.  Rudolph stared ahead in stunned 
+silence.  I'll never forget that tumultuous day.  If the jury accepted 
+the attorney's conclusion and convicted him, Rudolph... with his nose so
+ bright... wouldn't be guiding any sleighs any Christmas nights, for a 
+very long time indeed.</p>
+<p>This tragic set of circumstances all began on Christmas Eve during 
+our family's festive holiday get-together in New York City.  Shortly 
+after 9:00 PM, Grandma realized she had forgotten her medication back in
+ her apartment.  Worried that she was a wee bit tipsy from rather too 
+much eggnog, we begged her not to go.  But she staggered out the door, 
+saying, "I'll take Cousin Mel along."</p>
+<p>In truth, Mel wasn't actually our cousin.  Grandma had only recently 
+met Mel, who was working as a repairman in her apartment building.  They
+ became fast friends.  Because he was Grandma's friend, we all wanted to
+ call him "Grandpa Mel" or "Uncle Mel".  However, Grandma insisted that 
+we call him "Cousin Mel" because he was so much closer in age to us 
+kids.</p>
+<p>The roundtrip walk to Grandma's house through Central Park should 
+have taken less than 45 minutes, even at Grandma's slow pace.  But, with
+ our wild family Christmas soiree really cranking into high gear when 
+the Rockettes arrived before midnight, we all forgot about Grandma and 
+Cousin Mel.</p>
+<p>It wasn't until 9:00 AM on a groggy Christmas morning that Little 
+Timmy noticed that Grandma and Mel never returned.  We tried calling 
+Grandma on her cell phone and at her apartment, but got no answer.  
+Alarmed, Dad called the police to file a "Missing Grandma" report.</p>
+<p>Within an hour, the police called back and told us to meet them in 
+Central Park near the bridge closest to Grandma's apartment.  When we 
+arrived, we were horrified.  Cousin Mel was seated on a park bench, 
+disheveled and crying, repeating, "The reindeer... that red nose... the 
+jingle bells... Oh, the humanity!"  Grandma was nowhere to be seen.  The
+ police showed us the only sign she left behind: her winter coat, which 
+they had found at the scene of the attack with incriminating hoof prints
+ on the back.  The crime scene photographer snapped a photo of this 
+crucial evidence:</p>
+<div style="text-align:center;">
+<a href="http://pen-testing.sans.org/images/challenges/holiday/evidence.jpg" target="_blank"><img src="holiday-challenge_files/evidence.jpg" title="Evidence" border="0" height="300" width="400"></a>
+<p><a href="http://pen-testing.sans.org/images/challenges/holiday/evidence.jpg" target="_blank">Click here to download the original photo file.</a></p>
+</div>
+<p>Our diligent local police agents quickly contacted the authorities at
+ the North Pole, who obtained a court order to seize Rudolph's 
+belongings immediately, including the computer he kept in his stable.  
+Using that evidence, along with the eyewitness testimony of Cousin Mel, 
+the prosecutor carefully built his case against Rudolph.</p>
+<p>Based on Mel's description of the violent attack, after several weeks
+ with no sign of Grandma, the authorities officially presumed that our 
+dear Grandma had met her demise, a tragic victim of a reckless, renegade
+ reindeer bent on destruction. </p>
+<p>And that brings us back to today, here in the courthouse for the 
+criminal prosecution of Rudolph the Red Nosed Reindeer.  The prosecuting
+ attorney summarized the evidence, "The defendant's own computer system 
+included geo-location data transferred from a cell phone showing that 
+Mr. Reindeer was at the scene of the attack at the exact time that it 
+occurred.  Further, we have hoof prints on poor Grandma's coat that 
+match the defendant.  And, finally, we have the eye witness testimony of
+ Cousin Mel, who witnessed the gruesome event."</p>
+<p>With such detailed evidence and a carefully presented case against him, things were looking pretty grim for Rudolph.</p>
+<p>And then, it happened.  Suddenly and quite dramatically, Little Timmy
+ burst into the courtroom, arms flailing, waving a USB thumb drive in 
+his hands.  He shouted, "Your honor!  I'm so sorry for the interruption,
+ but I just discovered some potentially important evidence for this 
+case."</p>
+<p>"I object to this interruption," declared the annoyed prosecutor.</p>
+<p>"Objection overruled, counselor," said the judge, "I am obligated by 
+the official rules of Christmas-Special Courtroom Cliches to hear what 
+this youth has to say.  Go on, young man."</p>
+<p>Timmy explained, "My dear Grandma really loved computers.  Whenever 
+we visited her apartment, we'd almost always see her blue and silver wig
+ silhouetted by the soft glow of her computer screen.  Cyber attacks and
+ defenses - she was a wizard at that stuff.  This morning, as we went to
+ her apartment to collect her belongings, I noticed this USB token 
+connected to her computer.  When I looked at its contents, I found a <a href="http://pen-testing.sans.org/xmas2011.pcap">packet capture file</a>
+ that appears to have been created and updated Christmas morning... the 
+very morning of the attack and Grandma's disappearance.  She always 
+liked to keep track of her computer activity for troubleshooting 
+purposes, so Grandma must have been running a sniffer that fateful night
+ and following day.  I haven't been able to make any sense of the data 
+in those packets, but I just know that something here will help us 
+determine conclusively Rudolph's role in the attack and perhaps even 
+Grandma's location!"</p>
+<p>"Those are pretty serious statements, young man.  I'll dismiss the 
+court temporarily while our technical experts analyze the evidence in 
+more detail to help us get to the bottom of this case."</p>
+<p>And that, dear reader, is where you get involved.  Fire up your 
+favorite packet analysis tool, analyze this packet capture file, and 
+answer the following questions to help determine Rudolph's guilt or 
+innocence:</p>
+<ol>
+    <li>According to the <a href="http://pen-testing.sans.org/xmas2011.pcap">packet capture file</a>, what was Grandma's grand plan for Christmas day?</li>
+    <li>Why did the geo-location information on Rudolph's computer, 
+synced from his cell phone, show that Rudolph was in Central Park during
+ the attack?  Please describe each technical step that lead to this 
+"evidence" presented in court.</li>
+    <li>Where should the authorities look for Grandma?</li>
+    <li>Based on the evidence in the packet capture file, who is guilty in this story?</li>
+</ol>
+<p>Please answer each question by January 9, 2012, sending your results 
+to GrandmaChallenge (at) counterhackchallenges.com with a subject of 
+"Grandma Challenge".  From all submitted entries, we'll pick three 
+winners, according to the following plan:</p>
+<ul>
+<li>The best technical answer</li>
+<li>The most creative answer that is technically correct</li>
+<li>A random draw answer selected from all entries</li>
+</ul>
+<p>Remember, even if you can't answer one or more of the questions, 
+please do send in an answer of any kind to be entered in that random 
+draw.  Winners will receive an autographed copy of the Counter Hack 
+Reloaded book.</p> 
+<p>Remember, Rudolph needs your help to sort out this matter and see that justice is done.</p>
+<p>Merry Christmas!</p>
+<p>&#8212; Ed Skoudis &amp; Tom Hessman</p>
+      </div>
+      <div class="clear"></div>
+      <!--/ layout1 -->
+</div>
+
+
+          <div class="clear"></div>
+        </div>
+      </div>
+      <!--/ content -->
+
+      <!-- right navi -->
+      <div class="navigation">
+        
+        <div class="widget widget_pages">
+          <ul>
+
+
+          </ul>
+        </div>
+
+          <!-- widget: random blurb -->
+          <!-- /widget: random blurb -->
+
+          <!-- widget: ad -->
+          <div class="widget widget_ad">
+            <a href="https://www.sans.org/info/93044/258a50aba744229f24ce61c19d7b80c9hgs82" target="_top">
+    <img src="holiday-challenge_files/11039.jpg" alt="SANS 2012 - Orlando" title="SANS 2012 - Orlando" border="0" height="600" width="160">
+</a>          </div>
+          <!-- /widget: ad -->
+
+
+
+      </div>
+      <!--/ right navi -->
+      <div class="clear"></div>
+      <div class="middle-bot">
+            </div>
+      <div class="clear"></div>
+    </div>
+    <!--/ middle -->
+
+</div>
+<!-- Bottom Content -->
+<div class="bottom-content">
+<div class="container">
+
+<div class="footer-column" style="margin-right:10px">
+<h3>Latest Blog Posts</h3>
+        <p><a href="http://pen-testing.sans.org/blog/2011/12/10/sans-keynote-preso-put-your-game-face-on">SANS Keynote Preso: Put Your Game Face On</a><br>
+        December 10, 2011 - 11:23 AM
+</p>
+            <p><a href="http://pen-testing.sans.org/blog/2011/12/05/fuzzing-in-a-penetration-test">Using Fuzzing to Spice Up a Penetration Test</a><br>
+        December 05, 2011 - 7:50 PM
+</p>
+            <p><a href="http://pen-testing.sans.org/blog/2011/11/04/the-pushpin-tool-incorporating-geolocation-info-leakage-via-social-networks-in-your-pen-tests">The Pushpin Tool - Incorporating Geolocation Info Leakage via Social Networ [...]</a><br>
+        November 04, 2011 - 3:34 PM
+</p>
+    </div>
+
+<div class="footer-column" style="margin-right:30px">
+<h3>Latest Tweets</h3>
+            <p><a href="http://twitter.com/pentesttips/statuses/146985096614903808">@pentesttips: Slides from @edskoudis talk at #sanscdi on Care [...]</a><br>
+            December 14, 2011 - 4:09 PM</p>
+                    <p><a href="http://twitter.com/pentesttips/statuses/144834504178151424">@pentesttips: @dataprotection1 Glad you like.  We are looking [...]</a><br>
+            December 08, 2011 - 5:43 PM</p>
+                    <p><a href="http://twitter.com/pentesttips/statuses/144800996860760064">@pentesttips: 2011 Holiday Hacking Challenge by @edskoudis &amp;  [...]</a><br>
+            December 08, 2011 - 3:30 PM</p>
+        </div>
+
+<div class="footer-column">
+<h3>Latest Papers</h3>
+    <p><a href="http://pen-testing.sans.org/resources/papers/gcih/mitigating-browser-based-exploits-behavior-based-defenses-hardware-virtualization-123021">Mitigating Browser Based Exploits through Behavior Based Defenses and Hardware Virtualization</a><br>
+    By Joseph Faust</p>
+    <p><a href="http://pen-testing.sans.org/resources/papers/gcih/securely-deploying-android-devices-108653">Securely deploying Android devices</a><br>
+    By Angel Alonso-Parrizas</p>
+    <p><a href="http://pen-testing.sans.org/resources/papers/gcih/responding-zero-day-threats-106749">Responding to Zero Day Threats</a><br>
+    By Adam Kliarsky</p>
+</div>
+<div class="clear"></div>
+<div class="footer-quote-box">
+    <p>"This is the best hands-on course available anywhere."<br>- Whitney Janes, FedEx</p>
+    <p>"Ed Skoudis is the best teacher I've ever had. He is 100% competent and professional."<br>- Petra Klein, FRA</p>
+    <p>"This was by far the best course I have ever taken."<br>- Peter Lombars, Intrucom Inc.</p>
+</div>
+
+</div>
+</div><!-- end .bottom-content -->
+<!-- Footer -->
+<div id="footer">
+<div class="container">
+<img src="holiday-challenge_files/logo-footer.png" alt="SANS Pen Testing Christmas Hacking Challenge: Grandma Got All Hax0red by a Reindeer... Or Did She?" class="logo-footer">
+
+<ul class="site-selector">
+ <li class="site-switcher"><a href="#"><span class="hidden">SANS Site Network</span></a>
+  <ul class="sites">
+    <li class="current-site">Current Site</li>
+    <li class="pentest "><a href="http://pen-testing.sans.org/"><img src="holiday-challenge_files/pentest.png" alt="pentest">Penetration Testing</a></li>
+   <li class="selector-help">Choose a different site <a href="http://pen-testing.sans.org/help/site-network"><span class="hidden">Help</span></a></li><li class="sans "><a href="http://www.sans.org/"><img src="holiday-challenge_files/sans.png" alt="sans">Training</a></li>
+<li class="giac "><a href="http://www.giac.org/"><img src="holiday-challenge_files/giac.png" alt="giac">Certification</a></li>
+<li class="sti "><a href="http://www.sans.edu/"><img src="holiday-challenge_files/sti.png" alt="sti">Cyber Security Graduate School</a></li>
+<li class="isc "><a href="http://isc.sans.org/"><img src="holiday-challenge_files/isc.png" alt="isc">Internet Storm Center</a></li>
+<li class="awareness "><a href="http://www.securingthehuman.org/"><img src="holiday-challenge_files/awareness.png" alt="awareness">Security Awareness</a></li>
+<li class="forensics "><a href="http://computer-forensics.sans.org/"><img src="holiday-challenge_files/forensics.png" alt="forensics">Computer Forensics</a></li>
+<li class="audit "><a href="http://it-audit.sans.org/"><img src="holiday-challenge_files/audit.png" alt="audit">IT Audit</a></li>
+<li class="ssi last"><a href="http://software-security.sans.org/"><img src="holiday-challenge_files/ssi.png" alt="ssi">Software Security</a></li>
+  </ul>
+ </li>
+</ul>
+
+<div class="latest-icons">
+<a href="http://twitter.com/pentesttips"><img src="holiday-challenge_files/twitter-icon.png" alt="Twitter"></a>
+<a href="https://www.facebook.com/pages/SANS-Institute/173623382673767"><img src="holiday-challenge_files/facebook-icon.png" alt="Facebook"></a>
+<a href="http://pen-testing.sans.org/blog/feed/"><img src="holiday-challenge_files/rss-icon.png" alt="RSS"></a>
+</div><!-- end .latest-icons -->
+
+<div class="bottom-nav align-right">
+<ul>
+ <li><a href="http://pen-testing.sans.org/resources/">Resources</a></li>
+ <li><a href="http://pen-testing.sans.org/courses/">Courses</a></li>
+ <li><a href="http://pen-testing.sans.org/events/">Events</a></li>
+ <li><a href="http://pen-testing.sans.org/certification/">Certification</a></li>
+ <li class="last"><a href="http://pen-testing.sans.org/instructors/">Instructors</a></li>
+</ul>
+<p class="copyright align-right">© 2008 - 2011 The SANS&#8482; Institute</p>
+</div><!-- end .bottom-nav align-right-->
+</div><!-- end .container-->
+</div><!-- end .footer-->
+
+</div><!-- end .body -->
+
+</body></html>

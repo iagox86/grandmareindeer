@@ -1,0 +1,68 @@
+(1)  mysql> '
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''' at line 1
+
+(2)  mysql> show databases #
+information_schema	
+mydns	
+mysql	
+naughtylist	
+
+(3)  mysql> show tables from mydns #
+rr	
+soa	
+
+(4)  mysql> show columns from mydns.rr #
+id	int(10) unsigned	NO	PRI		auto_increment	
+zone	int(10) unsigned	NO	MUL			
+name	char(64)	NO				
+type	enum('A','AAAA','ALIAS','CNAME','HINFO','MX','NAPTR','NS','PTR','RP','SRV','TXT')	YES				
+data	char(128)	NO				
+aux	int(10) unsigned	NO				
+ttl	int(10) unsigned	NO		86400		
+
+(5)  mysql> show columns from mydns.soa #
+id	int(10) unsigned	NO	PRI		auto_increment	
+origin	char(255)	NO	UNI			
+ns	char(255)	NO				
+mbox	char(255)	NO				
+serial	int(10) unsigned	NO		1		
+refresh	int(10) unsigned	NO		28800		
+retry	int(10) unsigned	NO		7200		
+expire	int(10) unsigned	NO		604800		
+minimum	int(10) unsigned	NO		86400		
+ttl	int(10) unsigned	NO		86400		
+
+(6)  mysql> select * from mydns.soa #
+1	santaslist.northpole	ns1.santaslist.northpole	root.santaslist.northpole	25	28800	7200	604800	86400	86400	
+
+(7)  mysql> insert into mydns.soa (origin,ns,mbox) values ("apple.com","ns1.santaslist.northpole","root.santaslist.northpole") #
+
+(8)  mysql> select * from mydns.soa #
+1	santaslist.northpole	ns1.santaslist.northpole	root.santaslist.northpole	25	28800	7200	604800	86400	86400	
+2	apple.com	ns1.santaslist.northpole	root.santaslist.northpole	1	28800	7200	604800	86400	86400	
+
+(9)  mysql> select * from mydns.rr #
+1	1	@	NS	ns1.santaslist.northpole	0	86400	
+2	1	ns1.santaslist.northpole	A	172.19.79.2	0	86400	
+3	1	www.santaslist.northpole	A	172.19.79.2	0	86400	
+
+(10) mysql> insert into mydns.rr (zone,name,type,data) values (2,"itunes.apple.com","A","192.168.1.10") #
+
+(11) mysql> insert into mydns.rr (zone,name,type,data) values (2,"ax.init.itunes.apple.com","A","192.168.1.10") #
+
+(12) mysql> insert into mydns.rr (zone,name,type,data) values (2,"swcatalog.apple.com","A","192.168.1.10") #
+
+(13) mysql> insert into mydns.rr (zone,name,type,data) values (2,"swcdn.apple.com","A","192.168.1.10") #
+
+(14) mysql> insert into mydns.rr (zone,name,type,data) values (2,"swscan.apple.com","A","192.168.1.10") #
+
+(15) mysql> select * from mydns.rr #
+1	1	@	NS	ns1.santaslist.northpole	0	86400	
+2	1	ns1.santaslist.northpole	A	172.19.79.2	0	86400	
+3	1	www.santaslist.northpole	A	172.19.79.2	0	86400	
+4	2	itunes.apple.com	A	192.168.1.10	0	86400	
+5	2	ax.init.itunes.apple.com	A	192.168.1.10	0	86400	
+6	2	swcatalog.apple.com	A	192.168.1.10	0	86400	
+7	2	swcdn.apple.com	A	192.168.1.10	0	86400	
+8	2	swscan.apple.com	A	192.168.1.10	0	86400	
+

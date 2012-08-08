@@ -1,0 +1,107 @@
+.bodywrap {
+    height:100%;
+    background:url(/skins/red/topbg.gif) top repeat-x}
+
+.featurewrap {
+        background: url(/skins/red/topbg_home.gif) top repeat-x;
+        }
+
+.noheader {
+    background:url(/skins/red/topbg2.gif) top repeat-x}
+
+.homepage {
+    background:url(/skins/red/topbg_home.gif) top repeat-x}
+
+.noslider {
+    background:url(/skins/red/topbg2.gif) top repeat-x}
+
+a.btn-start {
+    background:url(/skins/red/btn-start.gif) no-repeat;}
+
+ul.dropdown li.active a {
+    background:url(/skins/red/topmenu_bg_bot.gif) center bottom no-repeat}
+
+ul.dropdown .root-item ul a:hover {
+    background:url(/skins/red/topmenu_sub_bg.gif) repeat-y #f0e6e6;
+    color:#b43737}
+    
+.bottom-content {
+    background:url(/skins/red/footer_sidebar_bg.gif) top repeat-x #610606;
+    color:#cdb46e;}
+
+.bottom-sidebar,
+.bottom-sidebar .content p{
+    color:#a76a6a;}
+
+.border {
+    background:url(/skins/red/bottom_line.gif) bottom repeat-x}
+
+.stext {
+    background:url(/skins/red/bg_search.gif) no-repeat;}
+
+.feed {
+    background:url(/skins/red/ico-feed.gif) right top no-repeat}
+
+.col-bot h3, 
+.col-bot li {
+    background:url(/skins/red/bottom_line.gif) bottom repeat-x;}
+
+.col-bot li a {
+    color:#a76a6a}
+
+.col-bot li a:hover {
+    color:#d5aaaa}
+
+.contact-form .inputtext {
+    background:url(/skins/red/bg_input_bot.gif) no-repeat;
+    color:#a76a6a}
+
+.contact-form .textarea {
+    background:url(/skins/red/bg_textarea_bot.gif) no-repeat;
+    color:#a76a6a;
+    scrollbar-base-color:#520606;
+    scrollbar-arrow-color:#a76a6a;
+    overflow:auto;}
+
+.contact-form .btn-submit {
+    background:url(/skins/red/btn-submit-bot.gif) no-repeat;
+    color:#fff}
+
+.footer {
+    background:#130101}
+
+.copyright {
+    color:#521f1f}
+
+.copyright a {
+    color:#620606}
+
+.copyright a:hover {
+    color:#881212}
+    
+.layouts .boxbg:hover h2 {
+    color:#8d2020}
+
+.boxbg {
+    background:url(/skins/red/bg_home_cols.gif) left bottom no-repeat;}
+    
+.boxbg:hover {
+    background:url(/skins/red/bg_home_cols.gif) right bottom no-repeat;}
+    
+.boxbg a.link-more {
+    color:#810808}
+
+.boxbg a.link-more:hover {
+    color:#810808}
+
+a.link-more {
+    color:#970a0a;}
+
+a.link-more:hover {
+    color:#970a0a;
+    border-bottom:1px solid #970a0a}
+
+.post-title h2 a:hover,
+.navigation a:hover,
+.post-entry a {
+    color:#970a0a}

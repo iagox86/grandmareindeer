@@ -1,0 +1,24 @@
+90.0,0,0,North Pole,Canada
+-36.848461,174.763333,Auckland,New Zealand
+-33.87365,151.206889,Sydney,Australia
+35.689489,139.691706,Tokyo,Japan
+40.332808,116.47765,Beijing,China
+39.904214,116.407414,Beijing,China
+55.752505,37.623168,Moskow,Russia
+52.523406,13.4114,Berlin,Germany
+48.858362,2.294242,Paris,France
+51.505624,-0.075383,London,UK
+-22.903539,-43.209587,Rio de Janeiro,Brazil
+18.467964,-66.108809,San Juan,Puerto Rico
+6.42375,-66.58973,Puerto Carreno,Venezuela
+40.748245,-73.985534,New York,USA
+43.653226,-79.383184,Toronto,Canada
+40.440625,-79.995886,Pittsburgh,USA
+41.8789,-87.63584,Chicago,USA
+39.739094,-104.984898,Denver,USA
+37.819751,-122.478168,San Francisco,USA
+61.190009,-149.870694,Anchorage,USA
+21.307237,-157.858055,Honolulu,USA
+90.0,0.0,North Pole,Canada
+
+

